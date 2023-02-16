@@ -39,6 +39,12 @@
       pip:
         name: docker-compose
         executable: pip3
+        
+    - name: Docker login
+      community.docker.docker_login:
+      username: VLRuben
+      password: "{{ lookup('env', 'TOKEN') }}"
+      registry_url: ghcr.io
 
     - name: ghcr register
       shell: "docker login ghcr.io -u VLRuben -p {{ CR_PAT}}"

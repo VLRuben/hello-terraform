@@ -37,7 +37,7 @@ pipeline {
                             sh 'terraform fmt'
                             sh 'terraform validate'
                             withCredentials([string(credentialsId: 'lucatic github', variable: 'CR_PAT')]) {
-                                sh 'terraform apply -auto-approve'
+                                sh 'TOKEN=$CR_PAT terraform apply -auto-approve'
                             }
                         }                  
                     }

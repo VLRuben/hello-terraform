@@ -44,9 +44,3 @@
       shell:
         cmd: wget https://raw.githubusercontent.com/VLRuben/hello-2048/main/docker-compose.yml
         warn: False
-
-    - name: Download foo.conf
-      ansible.builtin.get_url:
-      url: https://raw.githubusercontent.com/VLRuben/hello-2048/main/docker-compose.yml
-      dest: /opt/docker
-      mode: '666'

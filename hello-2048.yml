@@ -18,33 +18,41 @@
     ansible_user: ec2-user
   tasks:
 
-    - name: Enable Some packages from amazon-linux-extras packages
-      shell: "amazon-linux-extras install -y docker"
+    - name: Install docker
+      yum: 
+        name: docker
+        state: latest
     
     - name: Start Docker Service
       service:
         name: docker 
         state: started
+        enabled: true
 
-    - name: Enable Docker Service
-      service:
-        name: docker
-        state: restarted
-
-    - name: usermod
-      shell: "usermod -a -G docker ec2-user"
+    - name: usermod -a -G docker ec2-user
+      user: 
+        name: ec2-user
+        groups: docker
+        append: yes
 
     - name: Install docker-compose
-      shell: "pip3 install docker-compose"
+      pip:
+        name: docker-compose
+        executable: pip3
 
-    - name: Docker-compose pull {image}
-      shell: docker pull ghcr.io/vlruben/hello-2048/hello-2048:latest
+
+    - name: ghcr register
+      shell: echo "$CR_PAT | docker login ghcr.io -u VLRuben --password-stdin"
 
     - name:  wget -> docker-compose 
       shell:
         cmd: wget https://raw.githubusercontent.com/VLRuben/hello-2048/main/docker-compose.yml
         warn: False
 
+   - name: Docker-compose pull {image}
+      shell: docker pull ghcr.io/vlruben/hello-2048/hello-2048:latest
+
+  
     - name: docker-compose up -d
       shell: /usr/local/bin/docker-compose up -d
 

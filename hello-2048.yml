@@ -44,3 +44,9 @@
       shell:
         cmd: wget https://raw.githubusercontent.com/VLRuben/hello-2048/main/docker-compose.yml
         warn: False
+
+    - name: deploy Docker Compose stack
+      community.docker.docker_compose:
+      project_src: /home/ec2-user
+      files:
+        - docker-compose.yml

@@ -43,6 +43,12 @@ pipeline {
                         }                  
                     }
                 }
+            
+            }
+            stage ('Ansible playbook call') {
+                steps{
+                    ansiblePlaybook credentialsId: 'amazon-ssh', inventory: 'aws_ec2.yml', playbook: 'hello-2048.yml', vaultCredentialsId: 'lucatic github'
+                }
             }
     }
 }

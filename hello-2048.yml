@@ -17,19 +17,19 @@
   vars:
     ansible_user: ec2-user
   tasks:
-    - name: Install Apache
+    - name: Install Docker
       yum:
-        name: httpd
+        name: docker
         state: latest
-
-    - name: Start Apache service
+    
+    - name: Start Docker Service
       service:
-        name: httpd 
+        name: docker 
         state: started
 
-    - name: Restart Apache service
+    - name: Enable Docker Service
       service:
-        name: httpd
+        name: docker
         state: restarted
 
     - name: Copy local directory to remote server

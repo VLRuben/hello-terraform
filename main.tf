@@ -24,7 +24,21 @@ resource "aws_instance" "app_server" {
 
   }
 
+  provisioner "remote-exec" {
+      inline = [
+        "sudo amazon-linux-extras install -y docker",
+        "sudo service docker start",
+        "sudo systemctl enable docker",
+        "sudo usermod -a -G docker ec2-user",
+        "sudo pip3 install docker-compose",
+        "sudo docker pull ghcr.io/vlruben/hello-2048/hello-2048:latest",
+        "sudo docker-compose up -d"
+      ]
+    }
+
   provisioner "local-exec" {
         command = "ansible-playbook -i aws_ec2.yml hello-2048.yml"
     }
+
+  
 }

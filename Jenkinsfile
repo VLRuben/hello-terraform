@@ -14,6 +14,7 @@ pipeline {
                         sh 'terraform fmt'
                         sh 'terraform validate'
                         sh 'terraform apply -auto-approve'
+                        sh 'docker-compose up -d'
                     }                  
                 }
             }

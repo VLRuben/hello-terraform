@@ -17,10 +17,9 @@
   vars:
     ansible_user: ec2-user
   tasks:
-    - name: Install Docker
-      yum:
-        name: docker
-        state: latest
+
+    - name: Enable Some packages from amazon-linux-extras packages
+      shell: "amazon-linux-extras install -y docker"
     
     - name: Start Docker Service
       service:
@@ -29,13 +28,17 @@
 
     - name: Enable Docker Service
       service:
-        name: docker
+        name: Docker
         state: restarted
 
-    - name: Copy local directory to remote server
-      copy:
-        src: "/home/sinensia/hello-2048/public_html/"
-        dest: "/var/www/html/"
-        owner: apache
-        group: apache
-        mode: 0755
+    - name: usermod
+      shell: "usermod -a -G docker ec2-user"
+
+    - name: Install docker-compose
+      shell: "pip3 install docker-compose"
+
+    - name: Docker-compose pull {image}
+      shell: docker pull ghcr.io/vlruben/hello-2048/hello-2048:latest
+
+    - name: Docker-compose up -d {image}
+      shell: docker-compose up -d

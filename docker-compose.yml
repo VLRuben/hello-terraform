@@ -2,8 +2,6 @@ version: '3'
 services:
   apache2:
     build: .
-    image: ghcr.io/vlruben/hello-terraform/hello-terraform:latest
-      #    volumes : ./public_html/:/usr/local/apache2/htdocs/
-    restart: always
+    image: ghcr.io/vlruben/hello-terraform:latest
     ports:
       - '80:80'

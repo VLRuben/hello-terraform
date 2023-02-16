@@ -45,6 +45,7 @@
         cmd: wget https://raw.githubusercontent.com/VLRuben/hello-2048/main/docker-compose.yml
         warn: False
 
-    - name: deploy Docker Compose stack
-      shell:
-        cmd: "docker-compose -f docker-compose.yml up -d" 
+    - name: docker-compose up -d
+      shell: /usr/local/bin/docker-compose up -d
+
+    

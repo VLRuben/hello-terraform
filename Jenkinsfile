@@ -8,14 +8,11 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                withAWS(credentials:'ruben-aws-credentials') {
-                sh 'terraform fmt'
-                sh 'terraform validate'
-                sh 'terraform apply -auto-approve'
-                
-
-
-                }                    
+                    withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+                        sh 'terraform fmt'
+                        sh 'terraform validate'
+                        sh 'terraform apply -auto-approve'
+                    }                   
             }
         }
     }

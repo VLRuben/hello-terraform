@@ -24,6 +24,14 @@ resource "aws_instance" "app_server" {
 
   }
 
+   connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("/home/sinensia/.ssh/clave-lucatic.pem")
+    host        = self.public_ip
+
+  }
+
   provisioner "remote-exec" {
       inline = [
         "sudo amazon-linux-extras install -y docker",

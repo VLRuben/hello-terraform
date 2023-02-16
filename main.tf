@@ -24,11 +24,6 @@ resource "aws_instance" "app_server" {
 
   }
 
-   provisioner "file" {
-    source      = "/home/sinensia/hello-2048/public_html"
-    destination = "/home/ec2-user/"
-  }
-
   provisioner "local-exec" {
         command = "ansible-playbook -i aws_ec2.yml hello-2048.yml"
     }

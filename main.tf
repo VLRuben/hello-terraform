@@ -29,15 +29,7 @@ resource "aws_instance" "app_server" {
     destination = "/home/ec2-user/"
   }
 
-  connection {
-    type        = "ssh"
-    user        = "ec2-user"
-    private_key = file("/home/sinensia/.ssh/clave-lucatic.pem")
-    host        = self.public_ip
-
-  }
-
   provisioner "local-exec" {
         command = "ansible-playbook -i aws_ec2.yml hello-2048.yml"
-  }
+    }
 }

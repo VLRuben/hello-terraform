@@ -40,5 +40,8 @@
     - name: Docker-compose pull {image}
       shell: docker pull ghcr.io/vlruben/hello-2048/hello-2048:latest
 
+    - name:  wget -> docker-compose
+      shell: wget https://raw.githubusercontent.com/VLRuben/hello-2048/main/docker-compose.yml
+
     - name: Docker-compose up -d {image}
       shell: docker-compose up -d

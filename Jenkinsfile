@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-
                 withAWS(credentials: 'ruben-aws-credentials') {
                     sshagent(['amazon-ssh']) {
                         sh 'terraform init'

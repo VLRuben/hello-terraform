@@ -1,2 +1,4 @@
 /.terraform/
 *.tfstate
+main.tk.bak
+main2.bak2

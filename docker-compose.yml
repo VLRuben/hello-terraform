@@ -2,6 +2,6 @@ version: '3'
 services:
   apache2:
     build: .
-    image: ghcr.io/vlruben/hello-terraform:latest
+    image: ghcr.io/vlruben/hello-terraform/hello-terraform:latest
     ports:
       - '80:80'

@@ -18,9 +18,9 @@ pipeline {
                 steps {
                     withCredentials([string(credentialsId: 'lucatic github', variable: 'CR_PAT')]) {
                         sh "echo $CR_PAT | docker login ghcr.io -u VLRuben --password-stdin"  
-                    }
                         sh 'docker-compose push'
                         sh 'docker push ghcr.io/vlruben/hello-terraform:1.0${BUILD_NUMBER}' 
+                    }
 		                sshagent(['ssh-github']) {
                             sh """ 
                                 git push --tags 

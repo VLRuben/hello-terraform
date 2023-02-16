@@ -28,7 +28,7 @@
 
     - name: Enable Docker Service
       service:
-        name: Docker
+        name: docker
         state: restarted
 
     - name: usermod

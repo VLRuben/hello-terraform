@@ -37,7 +37,8 @@ pipeline {
                             sh 'terraform fmt'
                             sh 'terraform validate'
                             withCredentials([string(credentialsId: 'lucatic github', variable: 'CR_PAT')]) {
-                                sh 'TOKEN=$CR_PAT terraform apply -auto-approve'
+                                sh "echo $CR_PAT | docker login ghcr.io -u VLRuben --password-stdin"  
+                                sh 'terraform apply -auto-approve'
                             }
                         }                  
                     }

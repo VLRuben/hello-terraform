@@ -43,17 +43,19 @@
 
     - name: ghcr register
       shell: echo "$CR_PAT | docker login ghcr.io -u VLRuben --password-stdin"
+    
+    - name: docker-compose -> url
+      get_url: 
+        url: https://raw.githubusercontent.com/VLRuben/hello-terraform/master/docker-compose.yml
+        dest: /home/ec2-user
+        owner: ec2-user
+        group: ec2-user
 
-    - name:  wget -> docker-compose 
-      shell:
-        cmd: wget https://raw.githubusercontent.com/VLRuben/hello-2048/main/docker-compose.yml
-        warn: False
-
-   - name: Docker-compose pull {image}
-      shell: docker pull ghcr.io/vlruben/hello-2048/hello-2048:latest
-
-  
-    - name: docker-compose up -d
-      shell: /usr/local/bin/docker-compose up -d
+    - name: docker-compose up 
+      docker_compose:
+        project_src: /home/ec2-user
+        pull: true
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
 
     

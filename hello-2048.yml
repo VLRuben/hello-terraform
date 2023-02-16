@@ -39,9 +39,9 @@
       pip:
         name: docker-compose
         executable: pip3
-        
+
     - name: ghcr register
-      shell: echo "$CR_PAT | docker login ghcr.io -u VLRuben --password-stdin"
+      shell: "echo $CR_PAT | docker login ghcr.io -u VLRuben --password-stdin"
     
     - name: docker-compose -> url
       get_url: 

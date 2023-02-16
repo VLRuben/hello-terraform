@@ -28,7 +28,6 @@ pipeline {
                         }
                 }
             }
-
             stage('Deploy') {
                 steps {
                     withAWS(credentials: 'ruben-aws-credentials') {

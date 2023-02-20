@@ -20,7 +20,7 @@ resource "aws_instance" "app_server" {
   tags = {
 
     "Name" = var.instance_name
-    "APP"  = "vue2048"
+    "APP"  = "vue2048_v2"
 
   }
 
